@@ -63,6 +63,24 @@ MongoClient.connect(
     // findOneAndDelete({}, result=>{}) this is same as deleteOne, but the result return is the document that
     // is deleted
 
+    //Update
+    db.collection("Todo")
+      .findOneAndUpdate(
+        { text: "Something to do" },
+        {
+          $set: {
+            complete: true
+          }
+          //   $inc: {
+          //       age: 1
+          //   } This will increase a specify field by the number pass in
+        },
+        { returnOriginal: false }
+      )
+      .then(result => {
+        console.log(result);
+      });
+
     // client.close();
   }
 );
