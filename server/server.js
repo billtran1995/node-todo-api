@@ -11,27 +11,70 @@ mongoose.connect(
   { useNewUrlParser: true }
 );
 
+/*------------------------------------------------------------------------------------------*/
+// Todo model
 var Todo = mongoose.model("Todo", {
   text: {
-    type: String
+    type: String,
+    required: true,
+    minlength: 1,
+    trim: true //trim all whitespace
   },
   completed: {
-    type: Boolean
+    type: Boolean,
+    default: false
   },
   completedAt: {
-    type: Number
+    type: Number,
+    default: null
   }
 });
 
-var newTodo = new Todo({
-  text: "Cook dinner"
+// Create
+// var newTodo = new Todo({
+//   text: "Cook dinner"
+// });
+
+// var newTodo = new Todo({
+//   text: 12
+// }); => This will not fail, the 12 will be auto converted to string
+
+// var newTodo = new Todo({
+//   text: ""
+// });  => This fails because the text's minlength is 1
+
+// var newTodo = new Todo({
+//   text: "    "
+// }); => This fails because trim will take away all spaces and leave the string empty
+
+// Save todo
+// newTodo.save().then(
+//     doc => {
+//       console.log("Saved todo", doc);
+//     },
+//     e => {
+//       console.log("Unable to save todo", e);
+//     }
+//   );
+
+/* ----------------------------------------------------------------------------------*/
+// User model
+var User = mongoose.model("User", {
+  email: {
+    type: String,
+    required: true,
+    trim: true,
+    mindlength: 1
+  }
 });
 
-newTodo.save().then(
+var newUser = new User({ email: "trandattin1995@gmail.com" });
+
+newUser.save().then(
   doc => {
-    console.log("Saved todo", doc);
+    console.log("User is created0", doc);
   },
   e => {
-    console.log("Unable to save todo", e);
+    console.log("Fail to create user", e);
   }
 );
