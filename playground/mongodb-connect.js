@@ -54,6 +54,15 @@ MongoClient.connect(
         }
       );
 
+    // Delete
+    db.collection("Todo")
+      .deleteMany({ text: "Delete" }) // or .deleteOne (this will delete the first matched one)
+      .then(result => {
+        console.log(result);
+      });
+    // findOneAndDelete({}, result=>{}) this is same as deleteOne, but the result return is the document that
+    // is deleted
+
     // client.close();
   }
 );
