@@ -7,7 +7,7 @@ mongoose.Promise = global.Promise; // This will tell mongoose which promise to u
 // Here the promise is set to the built-in promise library instead of any third party promise
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost:27017/TodoApp",
+  process.env.MONGODB_URI,
   { useNewUrlParser: true }
 );
 
